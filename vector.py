@@ -1,8 +1,4 @@
 import math
-import pygame
-import time
-import keyboard
-
 
 class Vector2(object):
     def __init__(self, x=0.0, y=0.0):
