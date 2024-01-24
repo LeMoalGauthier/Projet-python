@@ -8,9 +8,9 @@ class Node(object):
         self.position = Vector2(x, y)
         self.neighbors = {'UP': None, 'DOWN': None, 'LEFT': None, 'RIGHT': None}
 
-    def connect_nodes(self, other_node, direction1, direction2):
+    def connect_nodes(self, direction1, other_node):
         self.neighbors[direction1] = other_node
-        other_node.neighbors[direction2] = self
+        #other_node.neighbors[direction2] = self
 
     def render(self, screen):
         for n in self.neighbors.keys():
