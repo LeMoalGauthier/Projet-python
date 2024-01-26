@@ -25,12 +25,29 @@ def check_keyboard_presses():
     else:
         return ""
 
+def out_of_screen (vitesse_personnage, direction):
+    if perso_pacman.x < 0:
+        direction = 'right'
+        perso_pacman.deplacer(vitesse_personnage, direction)
+    if perso_pacman.x > 950:
+        direction = 'left'
+        perso_pacman.deplacer(vitesse_personnage, direction)
+    if perso_pacman.y < 0:
+        direction = 'down'
+        perso_pacman.deplacer(vitesse_personnage, direction)
+    if perso_pacman.y > 550:
+        direction = 'up'
+        perso_pacman.deplacer(vitesse_personnage, direction)
+    return direction
+
 pygame.init()
 ecran = pygame.display.set_mode((1000, 600))
 perso_pacman = Move.Personnage(10, 50, "Pacman_perso.png")
+perso_pacman_full = Move.Personnage(10, 50, "Pacman_perso_full.png")
 vitesse_personnage = 5
 
 direction = ""
+index_eat = 0
 
 while True:
     for event in pygame.event.get():
@@ -43,10 +60,16 @@ while True:
     if new_direction:
         direction = new_direction
 
-    perso_pacman.deplacer(vitesse_personnage, direction)
 
+    perso_pacman.deplacer(vitesse_personnage, direction)
+    direction = out_of_screen(vitesse_personnage, direction)
     ecran.fill((0, 0, 0))
-    ecran.blit(perso_pacman.image, (perso_pacman.x, perso_pacman.y))
+
+    if index_eat %4 ==0:
+        ecran.blit(perso_pacman_full.image, (perso_pacman.x, perso_pacman.y))
+    else:
+        ecran.blit(perso_pacman.image, (perso_pacman.x, perso_pacman.y))
+    index_eat+=1
 
     pygame.display.flip()
     pygame.time.Clock().tick(30)
