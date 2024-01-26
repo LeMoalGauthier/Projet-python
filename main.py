@@ -1,37 +1,40 @@
 import pygame
+import platform
+import constants
 import sys
-from vector import Vector2
-from constants import *
-from map import Map
+from nodes import NodeGroup
 
-# Initialisation de Pygame
-pygame.init()
+_OS = platform.system()
+if _OS == "Windows":
+    import win32api
+elif _OS == "Darwin":
+    from Quartz import CGEventSourceButtonState, kCGEventSourceStateHIDSystemState, kCGMouseButtonLeft
 
 
-# Créer la fenêtre
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Node Test")
+if __name__ == '__main__':
 
-# Création de la carte
-map.instance = Map()
+    screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
+    pygame.display.set_caption("Map Test")
 
-# Boucle principale
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+    # Chemin vers le fichier de texte du labyrinthe
+    maze_file_path = "carte1.txt"
 
-    # Effacer l'écran
-    screen.fill(BLACK)
+    # Créer une instance de la classe NodeGroup
+    node_group = NodeGroup(maze_file_path)
 
-    # Afficher les nœuds et leurs connexions
-    for node in nodeList:
-        node.render(screen)
+    # Boucle principale
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
 
-    # Mettre à jour l'affichage
-    pygame.display.flip()
+        # Effacer l'écran
+        screen.fill(constants.BACKGROUND_COLOR)  # Remplacez la couleur blanche par celle de votre choix
 
-# Quitter Pygame
-pygame.quit()
-sys.exit()
+        # Mettre à jour l'affichage
+        pygame.display.flip()
+
+    # Quitter Pygame
+    pygame.quit()
+    sys.exit()
