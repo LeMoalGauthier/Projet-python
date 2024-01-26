@@ -3,9 +3,10 @@ import sys
 
 
 class Personnage:
-    def __init__(self, x, y, image_path):
+    def __init__(self, x, y,direction, image_path):
         self.x = x
         self.y = y
+        self.direction = direction
         self.image_right = pygame.image.load(image_path).convert_alpha()
         self.image_right = pygame.transform.scale(self.image_right, (60, 50))
         self.image_left = pygame.transform.flip(self.image_right, True, False)  # Image miroir
