@@ -15,7 +15,7 @@ class Ghost(Entity):
         self.name = GHOST
         self.points = 200
         self.goal = Vector2()
-        self.directionMethod = self.goalDirection()
+        self.directionMethod = self.goalDirection
         self.pacman = pacman
         #self.mode = ModeController(self)
         self.blinky = blinky
