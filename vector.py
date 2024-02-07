@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-blbla
-=======
 import math
 
 class Vector2(object):
@@ -52,4 +49,3 @@ class Vector2(object):
 
     def __str__(self):
         return "<"+str(self.x)+", "+str(self.y)+">"
->>>>>>> Stashed changes
